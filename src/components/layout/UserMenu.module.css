@@ -1,0 +1,10 @@
+.menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.logout {
+  min-height: 40px;
+  padding: 0 var(--space-3);
+}

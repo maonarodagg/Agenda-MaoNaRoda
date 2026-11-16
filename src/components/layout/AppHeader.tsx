@@ -2,6 +2,7 @@ import { NavLink } from 'react-router'
 import { ThemeToggle } from '../ui/ThemeToggle'
 import { Logo } from './Logo'
 import { NAV_ITEMS } from './navItems'
+import { UserMenu } from './UserMenu'
 import styles from './AppHeader.module.css'
 
 export function AppHeader() {
@@ -24,6 +25,7 @@ export function AppHeader() {
       </nav>
       <div className={styles.actions}>
         <ThemeToggle />
+        <UserMenu />
       </div>
     </header>
   )

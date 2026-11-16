@@ -37,6 +37,98 @@ export type Database = {
                   Relationships: [
                     
                   ]
+                },"categories": {
+                  Row: {
+                    "color": string,"created_at": string,"created_by": string | null,"id": string,"name": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "color": string,"created_at"?: string,"created_by"?: string | null,"id"?: string,"name": string
+                  }
+                  Update: {
+                    "color"?: string,"created_at"?: string,"created_by"?: string | null,"id"?: string,"name"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "categories_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"event_links": {
+                  Row: {
+                    "event_id": string,"id": string,"position": number,"title": string | null,"url": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "event_id": string,"id"?: string,"position"?: number,"title"?: string | null,"url": string
+                  }
+                  Update: {
+                    "event_id"?: string,"id"?: string,"position"?: number,"title"?: string | null,"url"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "event_links_event_id_fkey"
+      columns: ["event_id"]
+isOneToOne: false
+      referencedRelation: "events"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"event_participants": {
+                  Row: {
+                    "added_at": string,"event_id": string,"left_at": string | null,"user_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "added_at"?: string,"event_id": string,"left_at"?: string | null,"user_id": string
+                  }
+                  Update: {
+                    "added_at"?: string,"event_id"?: string,"left_at"?: string | null,"user_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "event_participants_event_id_fkey"
+      columns: ["event_id"]
+isOneToOne: false
+      referencedRelation: "events"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "event_participants_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"events": {
+                  Row: {
+                    "all_day": boolean,"category_id": string | null,"created_at": string,"created_by": string,"description": string | null,"end_at": string,"id": string,"location": string | null,"start_at": string,"title": string,"updated_at": string,"visibility": Database["public"]['Enums']["event_visibility"]
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "all_day"?: boolean,"category_id"?: string | null,"created_at"?: string,"created_by"?: string,"description"?: string | null,"end_at": string,"id"?: string,"location"?: string | null,"start_at": string,"title": string,"updated_at"?: string,"visibility"?: Database["public"]['Enums']["event_visibility"]
+                  }
+                  Update: {
+                    "all_day"?: boolean,"category_id"?: string | null,"created_at"?: string,"created_by"?: string,"description"?: string | null,"end_at"?: string,"id"?: string,"location"?: string | null,"start_at"?: string,"title"?: string,"updated_at"?: string,"visibility"?: Database["public"]['Enums']["event_visibility"]
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "events_category_id_fkey"
+      columns: ["category_id"]
+isOneToOne: false
+      referencedRelation: "categories"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "events_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"invites": {
                   Row: {
                     "created_at": string,"created_by": string | null,"expires_at": string,"id": string,"revoked_at": string | null,"token_hash": string,"used_at": string | null,"used_by": string | null
@@ -140,7 +232,7 @@ isOneToOne: true
                            }
           }
           Enums: {
-            [_ in never]: never
+            "event_visibility": "personal"|"group"|"team"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -260,7 +352,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            
+            "event_visibility": ["personal", "group", "team"]
           }
         }
 } as const

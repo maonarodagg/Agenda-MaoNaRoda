@@ -1,0 +1,79 @@
+# Prova de RLS — Fase 1
+# Gerado em 16/11/2026 20:46 rodando supabase/tests/*.test.sql no Supabase local (npm run db:test).
+
+## team_invites.test.sql
+1..35
+ok 1 - trigger cria perfil no cadastro
+ok 2 - perfil guarda o nome do cadastro
+ok 3 - anon não executa get_access_state
+ok 4 - anon não lê profiles
+ok 5 - estranho: sem acesso
+ok 6 - estranho não cria equipe
+ok 7 - dono sem e-mail confirmado: sem acesso
+ok 8 - dono sem e-mail confirmado não cria equipe
+ok 9 - dono pode criar equipe
+ok 10 - dono cria equipe
+ok 11 - dono vira membro
+ok 12 - não cria segunda equipe
+ok 13 - estranho continua sem acesso
+ok 14 - estranho não vê a equipe
+ok 15 - estranho não vê membros
+ok 16 - estranho não vê convites
+ok 17 - estranho só vê o próprio perfil
+ok 18 - estranho não gera convite
+ok 19 - estranho não se insere direto em team_members
+ok 20 - e-mail não confirmado não usa convite
+ok 21 - token inválido
+ok 22 - B entra com convite válido
+ok 23 - B virou membro
+ok 24 - B vê o perfil dos 2 membros (e não o do estranho)
+ok 25 - membro não reusa convite
+ok 26 - convite é de uso único
+ok 27 - convite expirado após 7 dias
+ok 28 - B revoga convite pendente
+ok 29 - membro não lê token_hash
+ok 30 - convite revogado não funciona
+ok 31 - B não remove o dono
+ok 32 - dono não remove a si mesmo
+ok 33 - dono remove B
+ok 34 - B removido perde acesso
+ok 35 - B removido não vê a equipe
+
+## events_visibility.test.sql
+1..36
+ok 1 - A (criador) vê os 4 eventos
+ok 2 - created_by preenchido com quem criou
+ok 3 - evento pessoal não aceita participantes
+ok 4 - não-membro não pode ser participante
+ok 5 - link precisa ser http(s)
+ok 6 - B vê os grupos em que participa e o de equipe, NÃO o pessoal da Ana
+ok 7 - B vê o link do grupo
+ok 8 - B vê os participantes dos seus grupos
+ok 9 - participante edita o evento (RN-04)
+ok 10 - criador não pode ser trocado
+ok 11 - participante exclui evento de grupo (RN-04)
+ok 12 - C vê só o evento de equipe (B não conseguiu apagar o de equipe)
+ok 13 - C não vê links do grupo
+ok 14 - C não vê participantes do grupo
+ok 15 - C não se coloca como participante do grupo
+ok 16 - C não adiciona link no grupo
+ok 17 - C não cria evento em nome de outra pessoa
+ok 18 - fim antes do início é recusado
+ok 19 - C cria evento pessoal
+ok 20 - membro vê as 4 categorias padrão
+ok 21 - membro cria categoria
+ok 22 - nome de categoria não repete (sem diferenciar maiúscula)
+ok 23 - cor precisa ser hex #RRGGBB
+ok 24 - C não editou nem excluiu o grupo
+ok 25 - C (não participante) não edita evento de equipe
+ok 26 - B não editou o pessoal da Ana
+ok 27 - A não vê o pessoal do Caio
+ok 28 - grupo que vira pessoal perde os participantes
+ok 29 - B deixa de ver o evento que virou pessoal
+ok 30 - não-membro não vê eventos (nem os de equipe)
+ok 31 - não-membro não vê categorias
+ok 32 - não-membro não vê links
+ok 33 - não-membro não cria evento
+ok 34 - anon não lê eventos
+ok 35 - membro novo vê o evento de equipe antigo
+ok 36 - membro removido não vê mais nada

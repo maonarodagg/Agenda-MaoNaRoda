@@ -1,0 +1,17 @@
+.button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}

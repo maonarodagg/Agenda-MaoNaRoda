@@ -1,0 +1,64 @@
+/* Tokens da identidade MãoNaRoda (mesmos valores de src/theme/colors.ts do app). */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #eef1f6;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f6fa;
+  --color-surface-3: #eef1f6;
+  --color-text: #0d1320;
+  --color-text-2: #5b6577;
+  --color-text-3: #97a0b0;
+  --color-border: #e7ebf2;
+  --color-brand: #0a66e0;
+  --color-brand-soft: #e9f1fe;
+  --color-on-brand: #ffffff;
+  --color-danger: #e5484d;
+  --color-success: #18a558;
+  --color-overlay: rgba(13, 19, 32, 0.45);
+  --color-shadow: rgba(10, 102, 224, 0.1);
+  --logo-icon: url('/logo-icon.png');
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #0d1320;
+  --color-surface: #161e2e;
+  --color-surface-2: #1c2640;
+  --color-surface-3: #222f4a;
+  --color-text: #f0f4fc;
+  --color-text-2: #8fa0be;
+  --color-text-3: #5b6e8a;
+  --color-border: #243049;
+  --color-brand: #3d85f0;
+  --color-brand-soft: #1a2d55;
+  --color-on-brand: #ffffff;
+  --color-danger: #f46a6e;
+  --color-success: #27b96b;
+  --color-overlay: rgba(0, 0, 0, 0.65);
+  --color-shadow: rgba(10, 102, 224, 0.18);
+  --logo-icon: url('/logo-icon-white.png');
+}
+
+:root {
+  --font-sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 0.9375rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.625rem;
+
+  --radius: 18px;
+  --radius-sm: 10px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --header-height: 60px;
+  --bottom-nav-height: 64px;
+}

@@ -1,0 +1,20 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  background: var(--logo-icon) center / contain no-repeat;
+}
+
+.text strong {
+  color: var(--color-brand);
+  font-weight: 800;
+}

@@ -1,0 +1,44 @@
+/* Paleta do tema "classic" do FullCalendar ligada aos tokens do MãoNaRoda.
+   Substitui o palette.css do pacote; claro/escuro vem dos próprios tokens. */
+.agenda-calendar {
+  /* botões */
+  --fc-classic-button: var(--color-surface-2);
+  --fc-classic-button-border: var(--color-border);
+  --fc-classic-button-strong: var(--color-brand);
+  --fc-classic-button-strong-border: var(--color-brand);
+  --fc-classic-button-outline: color-mix(in srgb, var(--color-brand) 40%, transparent);
+  --fc-classic-button-foreground: var(--color-text);
+
+  /* destaque */
+  --fc-classic-primary: var(--color-brand);
+  --fc-classic-primary-foreground: var(--color-on-brand);
+
+  /* conteúdo */
+  --fc-classic-event: var(--color-brand);
+  --fc-classic-event-contrast: var(--color-on-brand);
+  --fc-classic-background-event: var(--color-success);
+  --fc-classic-background-event-opacity: 15%;
+  --fc-classic-background-event-foreground-opacity: 50%;
+  --fc-classic-highlight: color-mix(in srgb, var(--color-brand) 18%, transparent);
+  --fc-classic-today: var(--color-brand-soft);
+  --fc-classic-now: var(--color-danger);
+  --fc-classic-small-dot-width: 8px;
+  --fc-classic-large-dot-width: 10px;
+
+  /* fundos neutros */
+  --fc-classic-background: var(--color-surface);
+  --fc-classic-faint: color-mix(in srgb, var(--color-text) 4%, transparent);
+  --fc-classic-muted: color-mix(in srgb, var(--color-text) 8%, transparent);
+  --fc-classic-strong: color-mix(in srgb, var(--color-text) 14%, transparent);
+
+  /* textos neutros */
+  --fc-classic-foreground: var(--color-text);
+  --fc-classic-faint-foreground: var(--color-text-3);
+  --fc-classic-muted-foreground: var(--color-text-2);
+
+  /* bordas */
+  --fc-classic-border: var(--color-border);
+  --fc-classic-strong-border: var(--color-text-3);
+
+  font-family: var(--font-sans);
+}

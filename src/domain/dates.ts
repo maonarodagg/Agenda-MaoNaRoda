@@ -25,3 +25,16 @@ export function formatDateTime(iso: string): string {
 export function formatDate(iso: string): string {
   return dateFormat.format(new Date(iso))
 }
+
+// en-CA formata como AAAA-MM-DD.
+const isoDateFormat = new Intl.DateTimeFormat('en-CA', {
+  timeZone: APP_TIME_ZONE,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+})
+
+// Data (AAAA-MM-DD) do instante no fuso de Brasília.
+export function toZonedDateString(iso: string): string {
+  return isoDateFormat.format(new Date(iso))
+}

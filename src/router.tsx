@@ -3,8 +3,8 @@ import { RequireMember } from './components/auth/RequireMember'
 import { AppLayout } from './components/layout/AppLayout'
 import { CreateTeamPage } from './pages/CreateTeamPage'
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
-import { HomePage } from './pages/HomePage'
 import { InvitePage } from './pages/InvitePage'
+import { LazyCalendarPage } from './pages/LazyCalendarPage'
 import { LoginPage } from './pages/LoginPage'
 import { MembersPage } from './pages/MembersPage'
 import { NoAccessPage } from './pages/NoAccessPage'
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
       {
         element: <AppLayout />,
         children: [
-          { path: '/', element: <HomePage /> },
+          { path: '/', element: <LazyCalendarPage /> },
           { path: '/membros', element: <MembersPage /> },
         ],
       },

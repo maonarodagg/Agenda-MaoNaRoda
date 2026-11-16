@@ -5,4 +5,7 @@ export interface NavItem {
   icon: string
 }
 
-export const NAV_ITEMS: NavItem[] = [{ to: '/', label: 'Agenda', icon: '▦' }]
+export const NAV_ITEMS: NavItem[] = [
+  { to: '/', label: 'Agenda', icon: '▦' },
+  { to: '/membros', label: 'Equipe', icon: '◉' },
+]

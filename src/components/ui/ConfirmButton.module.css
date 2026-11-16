@@ -1,0 +1,11 @@
+.group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.small {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  font-size: var(--font-size-sm);
+}

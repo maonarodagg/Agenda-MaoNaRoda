@@ -1,0 +1,58 @@
+/* Estilos de lista compartilhados por membros e convites. */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.row:first-child {
+  border-top: none;
+}
+
+.info {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.primary {
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.secondary {
+  color: var(--color-text-2);
+  font-size: var(--font-size-sm);
+  word-break: break-word;
+}
+
+.muted {
+  color: var(--color-text-3);
+  font-weight: 500;
+}
+
+.badge {
+  margin-left: var(--space-2);
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.empty {
+  margin: 0;
+  color: var(--color-text-2);
+}

@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# Segredos do Supabase local (OAuth Google)
+# Segredos do Supabase local
 supabase/.env

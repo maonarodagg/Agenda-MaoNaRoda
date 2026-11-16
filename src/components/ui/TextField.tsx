@@ -5,13 +5,25 @@ interface TextFieldProps {
   label: string
   value: string
   onChange: (value: string) => void
-  type?: 'text' | 'url' | 'email'
+  type?: 'text' | 'url' | 'email' | 'password'
   placeholder?: string
   maxLength?: number
+  minLength?: number
   required?: boolean
+  autoComplete?: string
 }
 
-export function TextField({ label, value, onChange, type = 'text', placeholder, maxLength, required }: TextFieldProps) {
+export function TextField({
+  label,
+  value,
+  onChange,
+  type = 'text',
+  placeholder,
+  maxLength,
+  minLength,
+  required,
+  autoComplete,
+}: TextFieldProps) {
   const id = useId()
   return (
     <div className={styles.field}>
@@ -25,7 +37,9 @@ export function TextField({ label, value, onChange, type = 'text', placeholder, 
         value={value}
         placeholder={placeholder}
         maxLength={maxLength}
+        minLength={minLength}
         required={required}
+        autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
       />
     </div>

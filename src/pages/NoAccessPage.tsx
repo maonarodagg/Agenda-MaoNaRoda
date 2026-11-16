@@ -4,7 +4,7 @@ import { Button } from '../components/ui/Button'
 import { CenteredCard } from '../components/ui/CenteredCard'
 import { LoadingScreen } from '../components/ui/LoadingScreen'
 
-// Logado no Google, mas sem convite aceito (RF-05).
+// Logado, mas sem convite aceito (RF-05).
 export function NoAccessPage() {
   const { status, access, user, logout } = useAuth()
 

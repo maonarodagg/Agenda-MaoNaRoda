@@ -6,7 +6,7 @@ export function toAccessState(value: unknown): AccessState {
   return 'no_access'
 }
 
-// Dados mínimos do usuário logado, vindos do Google.
+// Dados mínimos do usuário logado.
 export interface CurrentUser {
   id: string
   email: string

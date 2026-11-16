@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form button[type='submit'] {
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+}

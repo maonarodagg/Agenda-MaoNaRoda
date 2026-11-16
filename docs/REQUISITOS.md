@@ -1,6 +1,6 @@
 # Agenda da Equipe: Documento de Requisitos
 
-> Versão 1.0 · 16/11/2026 · Status: **aguardando aprovação antes de começar a produzir**
+> Versão 1.1 · 16/11/2026 (login trocado de Google para e-mail + senha) · Status: **aguardando aprovação antes de começar a produzir**
 >
 > Legenda: **[DEFINIDO]** = você respondeu · **[PADRÃO]** = assumi o padrão de mercado, confirme ou mude · **[?]** = ponto em aberto
 
@@ -19,7 +19,7 @@ Sistema web de agenda **interno** para a equipe do MãoNaRoda (2 a 10 pessoas), 
 | Uso                      | Interno da equipe, uma única equipe [DEFINIDO]                                    |
 | Plataforma               | Web agora; mobile (Expo) talvez depois [DEFINIDO]                                 |
 | Usuários                 | 2 a 10, todos com o mesmo nível de acesso [DEFINIDO]                              |
-| Login                    | Google [DEFINIDO]                                                                 |
+| Login                    | E-mail + senha, com confirmação de e-mail [DEFINIDO]                              |
 | Entrada de novos membros | Convite por link: qualquer membro gera, expira em 7 dias, uso único [DEFINIDO]    |
 | Stack                    | React + TypeScript + Supabase [DEFINIDO]                                          |
 | Lembretes                | Push no navegador + dentro do sistema; cada evento/tarefa define o seu [DEFINIDO] |
@@ -52,11 +52,13 @@ Só existe um papel: **Membro**. Todos têm as mesmas permissões gerais; o que 
 
 **Autenticação e equipe**
 
-- **RF-01** Login com conta Google (Supabase Auth). Sem senha própria.
-- **RF-02** O primeiro usuário cria a equipe; os demais só entram por convite.
+- **RF-01** Login com **e-mail e senha** (Supabase Auth). Senha com no mínimo 8 caracteres. Sem login social.
+- **RF-01a** Cadastro exige **confirmação de e-mail** (link enviado pelo Supabase) antes do primeiro acesso.
+- **RF-01b** **Esqueci minha senha:** envia link de redefinição por e-mail; o link abre a tela de nova senha.
+- **RF-02** O dono (e-mail configurado no banco) cria a conta e a equipe; os demais só entram por convite.
 - **RF-03** Qualquer membro gera link de convite: expira em 7 dias, uso único, e pode ser revogado antes de usar.
-- **RF-04** Quem abre o convite válido e loga com Google entra na equipe. Link expirado ou já usado mostra mensagem clara.
-- **RF-05** Sem convite válido, um login Google novo **não** acessa nenhum dado.
+- **RF-04** Quem abre o convite válido cria a conta (ou entra, se já tiver) e entra na equipe. **O cadastro só existe a partir do link de convite.** Link expirado ou já usado mostra mensagem clara.
+- **RF-05** Sem convite válido, uma conta nova **não** acessa nenhum dado.
 - **RF-06** Tela de membros: lista (nome, foto, e-mail) e convites pendentes.
 
 **Calendário**
@@ -125,7 +127,7 @@ Só existe um papel: **Membro**. Todos têm as mesmas permissões gerais; o que 
 **Segurança e privacidade**
 
 - **RNF-01** Segurança por **Row Level Security** no Supabase: a regra de quem vê o quê (RN-01 a RN-03) fica **no banco**, não só no front. Isso é essencial: sem isso, "Pessoal" seria só esconder no visual.
-- **RNF-02** Só dados mínimos do Google: nome, e-mail e foto.
+- **RNF-02** Só dados mínimos: nome e e-mail (sem foto; o avatar mostra as iniciais).
 - **RNF-03** **LGPD:** a equipe é de alunos, e se houver menores de 18, vale cuidado extra e um aviso de privacidade simples. **Não tenho certeza** de qual o enquadramento ideal pro caso de vocês, vale conferir com a escola/orientador.
 - **RNF-04** HTTPS obrigatório (padrão da hospedagem).
 
@@ -153,7 +155,7 @@ Só existe um papel: **Membro**. Todos têm as mesmas permissões gerais; o que 
 | Camada              | Escolha                                          | Observação                                                                                           |
 | ------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
 | Front               | React + TypeScript (Vite)                        | Mesma base do MãoNaRoda                                                                              |
-| Banco/Auth/Realtime | Supabase (Postgres + RLS)                        | Login Google via Supabase Auth                                                                       |
+| Banco/Auth/Realtime | Supabase (Postgres + RLS)                        | Login e-mail + senha via Supabase Auth. Na nuvem, **verificar** limite de envio de e-mail e configurar SMTP próprio se precisar |
 | Calendário (UI)     | FullCalendar ou react-big-calendar               | **Verificar** na hora qual encaixa melhor e a licença (algumas funções do FullCalendar são pagas)    |
 | Recorrência         | Padrão RRULE (RFC 5545) + biblioteca             | **Verificar** a lib atual                                                                            |
 | Lembretes           | Web Push (VAPID) + service worker + job agendado | Job via Supabase (Edge Function + agendador). **Verificar** na doc atual como agendar no plano usado |
@@ -169,7 +171,7 @@ Só existe um papel: **Membro**. Todos têm as mesmas permissões gerais; o que 
 
 | Fase  | Entrega                                                                                                              | Pronto quando                                                                 |
 | ----- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| **1** | Login Google, equipe, convite por link, calendário (dia/semana/mês), eventos pessoal/grupo/equipe, categorias, links | A equipe consegue entrar, criar e ver eventos respeitando a visibilidade      |
+| **1** | Login e-mail + senha, equipe, convite por link, calendário (dia/semana/mês), eventos pessoal/grupo/equipe, categorias, links | A equipe consegue entrar, criar e ver eventos respeitando a visibilidade      |
 | **2** | Participantes (entrar/sair), aviso de conflito, recorrência, lembretes (push + sino)                                 | Lembrete chega no horário certo, inclusive em recorrentes                     |
 | **3** | Tarefas, setores, subtarefas, comentários, dependências, kanban, tarefas no calendário                               | Fluxo completo de uma tarefa do "A fazer" ao "Feito" com aviso de dependência |
 | **4** | Disponibilidade da equipe, histórico, lixeira                                                                        | Dá pra achar um horário livre em comum e rastrear mudanças                    |
@@ -178,6 +180,7 @@ Só existe um papel: **Membro**. Todos têm as mesmas permissões gerais; o que 
 
 ## 10. Riscos e pontos de atenção
 
+- **Envio de e-mail (confirmação e redefinição de senha):** o SMTP padrão do Supabase tem limite baixo de envio. Se travar, configurar um SMTP próprio. **Conferir na doc atual.**
 - **Push no iOS** depende de instalar como PWA, e pode frustrar quem usa iPhone. Por isso o lembrete dentro do sistema não é só um extra, é o plano B.
 - **Lembretes confiáveis** são a parte mais traiçoeira: precisa de job agendado rodando e tratamento de assinaturas push expiradas.
 - **Recorrência com exceções** (editar só uma ocorrência) é a parte que mais costuma dar bug. Vale tempo extra de teste.

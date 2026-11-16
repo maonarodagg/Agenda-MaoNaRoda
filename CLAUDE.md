@@ -7,7 +7,7 @@ se algo conflitar com o que eu pedir no chat, me avise antes de seguir.
 ## Stack
 
 - React + TypeScript (Vite), modo `strict` ligado
-- Supabase: Postgres + Auth (login Google) + Realtime
+- Supabase: Postgres + Auth (e-mail + senha) + Realtime
 - Hospedagem: Vercel
 - UI em pt-BR, fuso `America/Sao_Paulo`, datas guardadas em UTC
 
@@ -29,7 +29,7 @@ se algo conflitar com o que eu pedir no chat, me avise antes de seguir.
 - Código e nomes de variável em inglês; textos da interface em português.
 - Comentários curtos, simples e diretos, em português.
 - Componentes pequenos, um por arquivo. Sem `any`.
-- Commits pequenos, mensagem em português no imperativo ("adiciona login com Google").
+- Commits pequenos, mensagem em português no imperativo ("adiciona tela de membros").
 
 ## Antes de dar uma tarefa por pronta
 
@@ -40,7 +40,12 @@ se algo conflitar com o que eu pedir no chat, me avise antes de seguir.
 
 ## Decisões já fechadas (não reabrir sem me perguntar)
 
-- Login só com Google. Entrada de membros só por convite (link, 7 dias, uso único).
+- Login com e-mail + senha (Supabase Auth). Sem login Google.
+  - Confirmação de e-mail obrigatória antes do primeiro acesso.
+  - Cadastro só pelo link de convite (o dono se cadastra na tela de criar a equipe).
+  - "Esqueci minha senha" com link de redefinição por e-mail.
+- Entrada de membros só por convite (link, 7 dias, uso único).
+- Dono = e-mail configurado em `app_config`; só ele cria a equipe, e só com e-mail confirmado.
 - Um único papel (membro). Existe só um "dono" (quem criou a equipe), apenas pra remover membros.
 - Participante entra no evento direto (sem aceitar) e pode sair.
 - Conflito de horário só avisa. Dependência de tarefa só avisa.

@@ -3,16 +3,18 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 
-select plan(31);
+select plan(35);
 
 -- Helpers de teste (somem no rollback)
 create schema tests;
 grant usage on schema tests to anon, authenticated;
 
-create function tests.create_user(p_id uuid, p_email text, p_name text) returns void
+-- p_confirmed = e-mail já confirmado (padrão sim)
+create function tests.create_user(p_id uuid, p_email text, p_name text, p_confirmed boolean default true) returns void
 language sql as $$
-  insert into auth.users (id, email, raw_user_meta_data, aud, role)
-  values (p_id, p_email, jsonb_build_object('full_name', p_name), 'authenticated', 'authenticated');
+  insert into auth.users (id, email, raw_user_meta_data, aud, role, email_confirmed_at)
+  values (p_id, p_email, jsonb_build_object('full_name', p_name), 'authenticated', 'authenticated',
+          case when p_confirmed then now() end);
 $$;
 
 create function tests.login_as(p_id uuid) returns void
@@ -33,15 +35,23 @@ language sql as $$
   select set_config('request.jwt.claims', '', true);
 $$;
 
+-- Começa do zero (tudo volta no rollback do fim)
+delete from public.invites;
+delete from public.team_members;
+delete from public.team;
+delete from auth.users;
+
 -- Guarda tokens gerados durante o teste
 create table tests.tokens (name text primary key, token text);
 grant all on tests.tokens to authenticated;
 
-select tests.create_user('00000000-0000-0000-0000-00000000000a', 'maonaroda.gg@gmail.com', 'Dono');
+-- Dono começa SEM confirmar o e-mail
+select tests.create_user('00000000-0000-0000-0000-00000000000a', 'maonaroda.gg@gmail.com', 'Dono', false);
 select tests.create_user('00000000-0000-0000-0000-00000000000b', 'b@teste.com', 'Bia');
 select tests.create_user('00000000-0000-0000-0000-0000000000ff', 'x@teste.com', 'Estranho');
 
-select is((select count(*)::int from public.profiles), 3, 'trigger cria perfil no primeiro login');
+select is((select count(*)::int from public.profiles), 3, 'trigger cria perfil no cadastro');
+select is((select full_name from public.profiles where email = 'b@teste.com'), 'Bia', 'perfil guarda o nome do cadastro');
 
 -- Visitante sem login não chama nada
 select tests.login_anon();
@@ -53,7 +63,15 @@ select tests.login_as('00000000-0000-0000-0000-0000000000ff');
 select is(public.get_access_state(), 'no_access', 'estranho: sem acesso');
 select throws_ok($$select public.create_team('Equipe do estranho')$$, 'P0001', 'not_allowed', 'estranho não cria equipe');
 
--- Dono cria a equipe
+-- Dono sem e-mail confirmado não é reconhecido (alguém pode ter se cadastrado com o e-mail dele)
+select tests.login_as('00000000-0000-0000-0000-00000000000a');
+select is(public.get_access_state(), 'no_access', 'dono sem e-mail confirmado: sem acesso');
+select throws_ok($$select public.create_team('MãoNaRoda')$$, 'P0001', 'not_allowed', 'dono sem e-mail confirmado não cria equipe');
+
+select tests.logout();
+update auth.users set email_confirmed_at = now() where id = '00000000-0000-0000-0000-00000000000a';
+
+-- Dono confirmado cria a equipe
 select tests.login_as('00000000-0000-0000-0000-00000000000a');
 select is(public.get_access_state(), 'can_create_team', 'dono pode criar equipe');
 select isnt(public.create_team('MãoNaRoda'), null, 'dono cria equipe');
@@ -76,6 +94,15 @@ select throws_ok(
 -- Convite 1: gerado pelo dono e usado por B
 select tests.login_as('00000000-0000-0000-0000-00000000000a');
 insert into tests.tokens values ('t1', public.create_invite());
+
+-- Conta sem e-mail confirmado não usa convite
+select tests.logout();
+select tests.create_user('00000000-0000-0000-0000-0000000000cc', 'naoconfirmado@teste.com', 'Sem confirmar', false);
+select tests.login_as('00000000-0000-0000-0000-0000000000cc');
+select throws_ok(
+  $$select public.accept_invite((select token from tests.tokens where name = 't1'))$$,
+  'P0001', 'email_not_confirmed', 'e-mail não confirmado não usa convite'
+);
 
 select tests.login_as('00000000-0000-0000-0000-0000000000ff');
 select is(public.accept_invite('token-que-nao-existe'), 'invalid', 'token inválido');

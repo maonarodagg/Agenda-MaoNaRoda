@@ -1,5 +1,5 @@
 # Prova de RLS — Fase 1
-# Gerado em 16/11/2026 20:46 rodando supabase/tests/*.test.sql no Supabase local (npm run db:test).
+# Gerado em 16/11/2026 21:08 rodando supabase/tests/*.test.sql no Supabase local (npm run db:test).
 
 ## team_invites.test.sql
 1..35
@@ -77,3 +77,20 @@ ok 33 - não-membro não cria evento
 ok 34 - anon não lê eventos
 ok 35 - membro novo vê o evento de equipe antigo
 ok 36 - membro removido não vê mais nada
+
+## save_event.test.sql
+1..14
+ok 1 - participantes salvos, sem o criador
+ok 2 - link vazio é ignorado
+ok 3 - evento pessoal não guarda participantes
+ok 4 - não aceita não-membro como participante
+ok 5 - falha desfaz o evento inteiro
+ok 6 - link sem http(s) é recusado
+ok 7 - participante edita pelo save_event
+ok 8 - título atualizado
+ok 9 - criador continua sendo A
+ok 10 - links substituídos
+ok 11 - B adicionou C como participante
+ok 12 - C agora vê o grupo
+ok 13 - C não edita o pessoal de A
+ok 14 - não-membro não cria evento

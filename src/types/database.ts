@@ -229,6 +229,9 @@ isOneToOne: true
                            },
 "revoke_invite":
 { Args: { "p_invite_id": string }; Returns: undefined
+                           },
+"save_event":
+{ Args: { "p_all_day": boolean,"p_category_id"?: string,"p_description"?: string,"p_end_at": string,"p_id"?: string,"p_links": Json,"p_location"?: string,"p_participant_ids": (string)[],"p_start_at": string,"p_title": string,"p_visibility": Database["public"]['Enums']["event_visibility"] }; Returns: string
                            }
           }
           Enums: {

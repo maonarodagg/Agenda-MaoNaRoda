@@ -10,15 +10,18 @@ export function useAsyncAction<Args extends unknown[]>(
   const [error, setError] = useState<string | null>(null)
   const [done, setDone] = useState(false)
 
+  // Devolve true se deu certo.
   const run = useCallback(
-    async (...args: Args) => {
+    async (...args: Args): Promise<boolean> => {
       setLoading(true)
       setError(null)
       try {
         await action(...args)
         setDone(true)
+        return true
       } catch (e) {
         setError(toMessage(e))
+        return false
       } finally {
         setLoading(false)
       }

@@ -34,7 +34,12 @@ export function CalendarPage() {
     <div className={styles.page}>
       <div className={styles.toolbar}>
         <h1 className={styles.title}>Agenda</h1>
-        <Button onClick={() => setDialog({ mode: 'create', draft: emptyDraft() })}>+ Novo evento</Button>
+        <div className={styles.actions}>
+          <Button variant="soft" onClick={() => setRefreshKey((k) => k + 1)} aria-label="Atualizar agenda">
+            ↻ Atualizar
+          </Button>
+          <Button onClick={() => setDialog({ mode: 'create', draft: emptyDraft() })}>+ Novo evento</Button>
+        </div>
       </div>
       <CalendarFilters
         filter={filter}

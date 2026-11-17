@@ -39,6 +39,13 @@ delete from public.invites;
 delete from public.team_members;
 delete from public.team;
 delete from auth.users;
+-- Categorias padrão, como a migration cria (o banco local pode ter sido mexido pela tela)
+delete from public.categories;
+insert into public.categories (name, color, created_by) values
+  ('Reunião', '#0A66E0', null),
+  ('Estudo', '#18A558', null),
+  ('Entrega', '#E5484D', null),
+  ('Pessoal', '#8E59D9', null);
 
 select tests.create_user('00000000-0000-0000-0000-00000000000a', 'a@teste.com', 'Ana');
 select tests.create_user('00000000-0000-0000-0000-00000000000b', 'b@teste.com', 'Bia');

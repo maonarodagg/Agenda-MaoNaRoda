@@ -72,7 +72,7 @@ Em **Authentication → Sign In / Providers**:
 
 ## 5. Criar o projeto na Vercel
 
-1. Em https://vercel.com/new, importe o repositório `Agenda-M-oNaRoda` do GitHub.
+1. Em https://vercel.com/new, importe o repositório `maonarodagg/Agenda-MaoNaRoda` do GitHub.
 2. Framework: **Vite** (detecta sozinho). Build: `npm run build`. Output: `dist`.
 3. Em **Environment Variables**, adicione (valores em Supabase → Project Settings → API):
    - `VITE_SUPABASE_URL` = a Project URL (`https://<ref>.supabase.co`)

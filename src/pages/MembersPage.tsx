@@ -1,6 +1,6 @@
 import { InvitesSection } from '../components/members/InvitesSection'
 import { MembersSection } from '../components/members/MembersSection'
-import styles from './MembersPage.module.css'
+import styles from './Page.module.css'
 
 export function MembersPage() {
   return (

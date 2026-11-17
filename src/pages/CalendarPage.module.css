@@ -1,7 +1,9 @@
+/* A página ocupa a altura da tela; o calendário fica com o espaço que sobra. */
 .page {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  height: calc(100dvh - var(--header-height) - var(--bottom-nav-height) - 2 * var(--space-4));
 }
 
 .toolbar {
@@ -13,4 +15,10 @@
 
 .title {
   font-size: var(--font-size-xl);
+}
+
+@media (min-width: 768px) {
+  .page {
+    height: calc(100dvh - var(--header-height) - 2 * var(--space-5));
+  }
 }

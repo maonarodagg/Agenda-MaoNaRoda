@@ -8,4 +8,5 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Agenda', icon: '▦' },
   { to: '/membros', label: 'Equipe', icon: '◉' },
+  { to: '/categorias', label: 'Categorias', icon: '◆' },
 ]

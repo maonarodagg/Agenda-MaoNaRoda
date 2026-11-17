@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 import { RequireMember } from './components/auth/RequireMember'
 import { AppLayout } from './components/layout/AppLayout'
+import { CategoriesPage } from './pages/CategoriesPage'
 import { CreateTeamPage } from './pages/CreateTeamPage'
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
 import { InvitePage } from './pages/InvitePage'
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
         children: [
           { path: '/', element: <LazyCalendarPage /> },
           { path: '/membros', element: <MembersPage /> },
+          { path: '/categorias', element: <CategoriesPage /> },
         ],
       },
     ],
